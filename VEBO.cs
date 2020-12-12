@@ -31,11 +31,12 @@ public class BufferObject<TDataType> : IDisposable
             _gl.DeleteBuffer(_handle);
         }
     }
-}
+
 public class VBO : BufferObject<float>{
 
 }
 
 public class EBO : BufferObject<uint>{
   
+}
 }
