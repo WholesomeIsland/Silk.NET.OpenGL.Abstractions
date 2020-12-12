@@ -33,10 +33,10 @@ public class BufferObject<TDataType> : IDisposable
     }
 
 public class VBO : BufferObject<float>{
-
+  public VBO(GL gl, Span<float> data) : base(gl, data,BufferTargetARB.VertexBuffer){}
 }
 
 public class EBO : BufferObject<uint>{
-  
+  public EBO(GL gl, Span<uint> data) : base(gl, data,BufferTargetARB.ElementVertexBuffer){}
 }
 }
