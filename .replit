@@ -1,2 +1,2 @@
 language = "csharp"
-run = ""
+run = "dotnet build"
