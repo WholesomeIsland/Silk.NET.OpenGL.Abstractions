@@ -8,7 +8,7 @@ Therefore signifigantly lowering the barrier of entry to graphics programming.
 ```cs
 //Coming at 0.1
 ```
-#Performance
+# Performance
 as with any sort of Abstractions / Wrapper there is going to be signifigant or slight slowdowns depending on what it is.
 On my system the example 'Hello Quad' took 95.6 MB of RAM.
 the same example in Silk.NET took 92.5 MB of RAM.
