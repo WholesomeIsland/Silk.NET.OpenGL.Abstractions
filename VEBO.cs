@@ -5,10 +5,10 @@ public class BufferObject<TDataType> : IDisposable
         where TDataType : unmanaged
     {
         private uint _handle;
-        private BufferTargetARB _bufferType;
+        private GLEnum _bufferType;
         private GL _gl;
 
-        public unsafe BufferObject(GL gl, Span<TDataType> data, BufferTargetARB bufferType)
+        public unsafe BufferObject(GL gl, Span<TDataType> data, GLEnum bufferType, GLEnum StaticOrDynamic)
         {
             _gl = gl;
             _bufferType = bufferType;
@@ -17,7 +17,7 @@ public class BufferObject<TDataType> : IDisposable
             Bind();
             fixed (void* d = data)
             {
-                _gl.BufferData(bufferType, (UIntPtr) (data.Length * sizeof(TDataType)), d, BufferUsageARB.StaticDraw);
+                _gl.BufferData(bufferType, (UIntPtr) (data.Length * sizeof(TDataType)), d, StaticOrDynamic);
             }
         }
 
@@ -33,10 +33,10 @@ public class BufferObject<TDataType> : IDisposable
     }
 
 public class VBO : BufferObject<float>{
-  public VBO(GL gl, Span<float> data) : base(gl, data,BufferTargetARB.ArrayBuffer){}
+  public VBO(GL gl, Span<float> data, GLEnum SOD) : base(gl, data,GLEnum.ArrayBuffer, SOD){}
 }
 
 public class EBO : BufferObject<uint>{
-  public EBO(GL gl, Span<uint> data) : base(gl, data,BufferTargetARB.ElementArrayBuffer){}
+  public EBO(GL gl, Span<uint> data) : base(gl, data,GLEnum.ElementArrayBuffer, GLEnum.StaticDraw){}
 }
 }
