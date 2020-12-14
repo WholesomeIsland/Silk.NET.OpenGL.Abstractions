@@ -20,4 +20,4 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build OpenGL.Abstractions.csproj --configuration Release --no-restore
+      run: dotnet build OpenGL.Abstractions.sln --configuration Release --no-restore
