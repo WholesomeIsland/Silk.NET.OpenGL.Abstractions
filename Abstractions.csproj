@@ -11,11 +11,17 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>OpenGL</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/WholesomeIsland/CommonOpenGLAbstractions</PackageProjectUrl>
 </PropertyGroup>
 <ItemGroup>
   <Compile Remove="Hello Quad\**" />
   <EmbeddedResource Remove="Hello Quad\**" />
   <None Remove="Hello Quad\**" />
+  <None Include="LICENSE.txt">
+    <Pack>True</Pack>
+    <PackagePath></PackagePath>
+  </None>
 </ItemGroup>
 <ItemGroup>
 <PackageReference Include="Silk.NET" Version="1.9.0" />
