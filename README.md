@@ -6,7 +6,7 @@ the goal of this is to lower that to under 50,
 Therefore signifigantly lowering the barrier of entry to graphics programming.
 # Usage
 ```cs
-//Coming at 0.1
+//See Examples
 ```
 # Performance
 as with any sort of Abstractions / Wrapper there is going to be slowdowns and other drawbacks.
