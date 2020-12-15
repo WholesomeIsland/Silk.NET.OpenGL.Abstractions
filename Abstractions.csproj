@@ -13,6 +13,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/WholesomeIsland/CommonOpenGLAbstractions</PackageProjectUrl>
+        <PackageLicenseExpression></PackageLicenseExpression>
 </PropertyGroup>
 <ItemGroup>
   <Compile Remove="Hello Quad\**" />
@@ -22,6 +23,14 @@
     <Pack>True</Pack>
     <PackagePath></PackagePath>
   </None>
+  <None Include="LICENSE.txt">
+    <Pack>True</Pack>
+    <PackagePath></PackagePath>
+  </None>
+</ItemGroup>
+<ItemGroup>
+  <None Remove="LICENSE.txt" />
+  <None Remove="LICENSE.txt" />
 </ItemGroup>
 <ItemGroup>
 <PackageReference Include="Silk.NET" Version="1.9.0" />
