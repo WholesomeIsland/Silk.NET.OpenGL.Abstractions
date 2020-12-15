@@ -3,6 +3,14 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>Abstractions</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Version>0.1.0</Version>
+        <Authors>Wholesomeisland</Authors>
+        <Product>OpenGL.Abstractions</Product>
+        <Description>OpenGL Abstractions for Silk.NET.</Description>
+        <RepositoryUrl>https://github.com/WholesomeIsland/CommonOpenGLAbstractions</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>OpenGL</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 </PropertyGroup>
 <ItemGroup>
   <Compile Remove="Hello Quad\**" />
