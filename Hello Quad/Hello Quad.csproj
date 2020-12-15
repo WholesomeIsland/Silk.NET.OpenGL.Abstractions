@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonOpenGLAbstractions\Abstractions.csproj" />
+    <ProjectReference Include="..\Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
