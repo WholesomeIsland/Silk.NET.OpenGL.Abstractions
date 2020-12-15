@@ -1,4 +1,5 @@
 # .NET Desktop
+
 # Build and run tests for .NET Desktop or Windows classic desktop solutions.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
@@ -13,10 +14,12 @@ variables:
   solution: 'OpenGL.Abstractions.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-
+  nugetPackage: 'bin/Release/Abstractions.0.1.0.nupkg'
 steps:
 - task: NuGetToolInstaller@1
-
+- task: NuGetAuthenticate@0
+  inputs:
+    forceReinstallCredentialProvider: true
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -31,3 +34,10 @@ steps:
   inputs:
     command: pack
     packagesToPack: 'Abstractions.csproj'
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(nugetPackage)'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '853749b3-ab25-47f4-9df7-8126030c5068/567556b1-4423-4728-bfc0-e9eb23dc1b4f'
+    allowPackageConflicts: true
