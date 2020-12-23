@@ -3,7 +3,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>Abstractions</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Version>0.1.0</Version>
+        <Version>0.1.1</Version>
         <Authors>Wholesomeisland</Authors>
         <Product>OpenGL.Abstractions</Product>
         <Description>OpenGL Abstractions for Silk.NET.</Description>
@@ -13,12 +13,16 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/WholesomeIsland/CommonOpenGLAbstractions</PackageProjectUrl>
-        <PackageLicenseExpression></PackageLicenseExpression>
+        <PackageLicenseExpression>MIT License</PackageLicenseExpression>
 </PropertyGroup>
 <ItemGroup>
   <Compile Remove="Hello Quad\**" />
   <EmbeddedResource Remove="Hello Quad\**" />
   <None Remove="Hello Quad\**" />
+  <None Include="LICENSE.txt">
+    <Pack>True</Pack>
+    <PackagePath></PackagePath>
+  </None>
   <None Include="LICENSE.txt">
     <Pack>True</Pack>
     <PackagePath></PackagePath>
