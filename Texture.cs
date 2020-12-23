@@ -24,7 +24,7 @@ namespace Abstraactions
         
         public unsafe Texture(GL gl, string path, int TextureSlot)
         {
-            var img = Image.FromFile(path);
+            var img = System.Drawing.Image.FromFile(path);
             fixed (void* data = &MemoryMarshal.GetReference(new Span<byte>(img.ToByteArray())))
             {
                 Load(gl, data, (uint) img.Width, (uint) img.Height, TextureSlot);
