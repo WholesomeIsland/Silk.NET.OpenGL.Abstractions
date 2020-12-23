@@ -24,12 +24,17 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: CmdLine@2
+  inputs:
+    script: 'dotnet restore $(solution)' 
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
+
 - task: NuGetCommand@2
   inputs:
     command: pack
