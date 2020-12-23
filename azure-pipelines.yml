@@ -22,7 +22,8 @@ steps:
     forceReinstallCredentialProvider: true
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    nugetConfigPath: 'nuget.config'
 
 - task: CmdLine@2
   inputs:
