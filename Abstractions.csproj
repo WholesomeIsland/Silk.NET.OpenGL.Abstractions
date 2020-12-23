@@ -12,7 +12,7 @@
         <PackageTags>OpenGL</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageProjectUrl>https://github.com/WholesomeIsland/CommonOpenGLAbstractions</PackageProjectUrl>
-        <PackageLicenseExpression>MIT License</PackageLicenseExpression>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
 </PropertyGroup>
 <ItemGroup>
   <Compile Remove="Hello Quad\**" />
