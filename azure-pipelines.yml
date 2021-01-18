@@ -14,7 +14,7 @@ variables:
   solution: 'OpenGL.Abstractions.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  nugetPackage: 'bin/Release/Abstractions.0.1.1.nupkg'
+  nugetPackage: 'bin/Release/Abstractions.0.1.2.nupkg'
 steps:
 - task: NuGetToolInstaller@1
 - task: NuGetAuthenticate@0
