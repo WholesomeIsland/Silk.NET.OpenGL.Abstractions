@@ -3,7 +3,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>Abstractions</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Version>0.1.1</Version>
+        <Version>0.1.2</Version>
         <Authors>Wholesomeisland</Authors>
         <Product>OpenGL.Abstractions</Product>
         <Description>OpenGL Abstractions for Silk.NET.</Description>
