@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Abstraactions
+namespace Abstractions
 {
     internal static class ImageEXT
     {
