@@ -12,3 +12,4 @@ Therefore signifigantly lowering the barrier of entry to graphics programming.
 as with any sort of Abstractions / Wrapper there is going to be slowdowns and other drawbacks.
 On my system the example 'Hello Quad' took 95.6 MB of RAM.
 the same example in Silk.NET took 92.5 MB of RAM.
+The Helo Quad Abstractions example shown here takes 174 MB of RAM.
