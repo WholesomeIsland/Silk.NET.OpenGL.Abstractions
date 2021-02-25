@@ -7,12 +7,12 @@ namespace Abstractions
 {
     public class GLObject
     {
-        Shader shader;
-        private static VBO Vbo;
-        private static EBO Ebo;
-        private static VAO Vao;
-        GL gl;
-        uint[] indices;
+         public Shader shader;
+         VBO Vbo;
+         EBO Ebo;
+         public VAO Vao;
+        public GL gl;
+        public uint[] indices;
         /// <summary>
         /// Creates a new GLObject
         /// </summary>
@@ -39,7 +39,7 @@ namespace Abstractions
             Vao.Dispose();
             shader.Dispose();
         }
-        public unsafe void Render()
+        public virtual unsafe void Render()
         {
             Vao.Bind();
             shader.Use();

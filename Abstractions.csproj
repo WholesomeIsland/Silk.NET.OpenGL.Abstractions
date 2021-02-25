@@ -16,12 +16,21 @@
  
 </PropertyGroup>
 <ItemGroup>
+  <Compile Remove="Abstractions.Math\**" />
   <Compile Remove="Hello Quad\**" />
   <Compile Remove="Helo Quad Abstractions\**" />
+  <Compile Remove="Model Loading\**" />
+  <Compile Remove="Model.Sdk\**" />
+  <EmbeddedResource Remove="Abstractions.Math\**" />
   <EmbeddedResource Remove="Hello Quad\**" />
   <EmbeddedResource Remove="Helo Quad Abstractions\**" />
+  <EmbeddedResource Remove="Model Loading\**" />
+  <EmbeddedResource Remove="Model.Sdk\**" />
+  <None Remove="Abstractions.Math\**" />
   <None Remove="Hello Quad\**" />
   <None Remove="Helo Quad Abstractions\**" />
+  <None Remove="Model Loading\**" />
+  <None Remove="Model.Sdk\**" />
   <None Include="LICENSE.txt">
     <Pack>True</Pack>
     <PackagePath></PackagePath>
@@ -40,7 +49,7 @@
   <None Remove="LICENSE.txt" />
 </ItemGroup>
 <ItemGroup>
-<PackageReference Include="Silk.NET" Version="1.9.0" />
-<PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+<PackageReference Include="Silk.NET" Version="2.1.0" />
+<PackageReference Include="System.Drawing.Common" Version="5.0.1" />
 </ItemGroup>
 </Project>
