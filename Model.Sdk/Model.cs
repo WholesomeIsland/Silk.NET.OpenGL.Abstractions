@@ -1,33 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Assimp;
-using Assimp.Unmanaged;
 namespace Abstractions.Model
 {
     public unsafe class Model
     {
-        AiScene mesh;
-        public AiAnimation*[] animations 
-        { 
-            get {
-                unsafe
-                {
-                    return Marshal.PtrToStructure<AiAnimation*[]>(mesh.Animations);
-                }
-            } 
-        }
-        public AiMesh*[] meshes 
-        { 
-            get {
-                unsafe
-                {
-                    return Marshal.PtrToStructure<AiMesh*[]>(mesh.Meshes);
-                }
-            } 
-        }
-        public Assimp.Vector3D[] getVertsFromModel(int index)
-        {
-            return Marshal.PtrToStructure<Vector3D[]>(meshes[index]->Vertices);
+        private AssimpContext actx;
+        public Scene scene;
+        public Vector3D[] getVertsFromModel(int index){
+            return scene.Meshes[index].Vertices.ToArray();
         }
         /// <summary>
         /// Create a new model
@@ -36,7 +17,8 @@ namespace Abstractions.Model
         /// <param name="pps">post process steps. a bitwise or that specifies extra setps for loading models.</param>
         public Model(string pathToModel, Assimp.PostProcessSteps pps)
         {
-            mesh = Marshal.PtrToStructure<AiScene>(AssimpLibrary.Instance.ImportFile(pathToModel, pps, (IntPtr)null));
+            actx = new AssimpContext();
+            scene = actx.ImportFile(pathToModel, pps);
         }
     }
 }

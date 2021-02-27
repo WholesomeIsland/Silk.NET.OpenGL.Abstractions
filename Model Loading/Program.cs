@@ -10,7 +10,7 @@ namespace Model_Loading
 {
     class Program
     {
-        static float[] AsV3DToFArr(Assimp.Vector3D[] arr)
+        static float[] V3DToFArr(Assimp.Vector3D[] arr)
         {
             List<float> rtnval = new List<float>();
             foreach (var item in arr)
@@ -40,7 +40,7 @@ namespace Model_Loading
                 model = new Model("Model.fbx", Assimp.PostProcessSteps.None);
                 List<Texture> tex = new List<Texture>();
                 tex.Add(new Texture(GL.GetApi(window), "Diffuse.png", 0));
-                globject = new GLObjTextured(GL.GetApi(window), AsV3DToFArr(model.getVertsFromModel(0)), null, "Shader.vert", "Shader.frag", false, tex);
+                globject = new GLObjTextured(GL.GetApi(window), V3DToFArr(model.getVertsFromModel(0)), null, "Shader.vert", "Shader.frag", false, tex);
             };
             window.Closing += () => {
                 globject.Dispose();
