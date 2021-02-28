@@ -13,3 +13,6 @@ as with any sort of Abstractions / Wrapper there is going to be slowdowns and ot
 On my system the example 'Hello Quad' took 95.6 MB of RAM.
 the same example in Silk.NET took 92.5 MB of RAM.
 The Helo Quad Abstractions example shown here takes 174 MB of RAM.
+
+### Credits
+the model from the model loading example is from [sketchfab](https://sketchfab.com/3d-models/hk-mp5-9mm-submachine-gun-c503d96157614fb78b5953d49e643b78)

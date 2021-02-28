@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AssimpNet" Version="4.1.0" />
+    <PackageReference Include="ChamberLib.FbxSharp" Version="0.10.0" />
+    <PackageReference Include="FbxSharp" Version="0.9.0" />
+    <PackageReference Include="JeremyAnsel.Media.WavefrontObj" Version="2.0.19" />
   </ItemGroup>
 
 </Project>

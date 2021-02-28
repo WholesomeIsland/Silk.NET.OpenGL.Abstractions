@@ -1,7 +1,7 @@
 ﻿using Abstractions;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
-using Abstractions.Model;
+using Abstractions.Model.GL;
 using System.Drawing;
 using System.Collections.Generic;
 using Texture = Abstractions.Texture;
@@ -10,20 +10,8 @@ namespace Model_Loading
 {
     class Program
     {
-        static float[] V3DToFArr(Assimp.Vector3D[] arr)
-        {
-            List<float> rtnval = new List<float>();
-            foreach (var item in arr)
-            {
-                rtnval.Add(item.X);
-                rtnval.Add(item.Y);
-                rtnval.Add(item.Z);
-            }
-            return rtnval.ToArray();
-        }
         static GLObjTextured globject;
-        static Model model;
-        static Texture texture;
+        static FbxGLModel model;
         static void Main(string[] args)
         {
             var Options = WindowOptions.Default;
@@ -33,14 +21,15 @@ namespace Model_Loading
             window.Render += (obj) => {
                 GL.GetApi(window).ClearColor(Color.Black);
                 GL.GetApi(window).Clear((uint)ClearBufferMask.ColorBufferBit);
-                texture.Bind();
                 globject.Render();
             };
             window.Load += () => {
-                model = new Model("Model.fbx", Assimp.PostProcessSteps.None);
+                model = new FbxGLModel("Model.obj");
                 List<Texture> tex = new List<Texture>();
                 tex.Add(new Texture(GL.GetApi(window), "Diffuse.png", 0));
-                globject = new GLObjTextured(GL.GetApi(window), V3DToFArr(model.getVertsFromModel(0)), null, "Shader.vert", "Shader.frag", false, tex);
+                List<float> verts = new List<float>(model.vertices);
+                GL _gl = GL.GetApi(window);
+                globject = new GLObjTextured(_gl, verts.ToArray(), null, "Shader.vert", "Shader.frag", false, tex);
             };
             window.Closing += () => {
                 globject.Dispose();
