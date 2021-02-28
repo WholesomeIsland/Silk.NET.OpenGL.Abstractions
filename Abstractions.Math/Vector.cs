@@ -83,6 +83,16 @@ namespace Abstractions.math
         /// Value at row 4, column 4 of the matrix.
         /// </summary>
         public float M44;
+        public unsafe float* value_ptr
+        {
+            get
+            {
+                fixed(float* valptr = &this.M11)
+                {
+                    return valptr;
+                }
+            }
+        }
         #endregion Public Fields
  
         private static readonly Matrix4x4 _identity = new Matrix4x4

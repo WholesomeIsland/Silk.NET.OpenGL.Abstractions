@@ -1,6 +1,7 @@
 ﻿using Silk.NET.OpenGL;
 using System;
 using System.Collections.Generic;
+using Abstractions.math;
 using System.Text;
 
 namespace Abstractions
@@ -21,7 +22,7 @@ namespace Abstractions
         /// <param name="indices">uint[] of vertices</param>
         /// <param name="vertPath">the path to the vertex shader</param>
         /// <param name="fragPath">the path to the fragment shader</param>
-        /// <param name="isDynamic">is the vertices going to change often (WIP) WARNING More expensive to draw if this is true</param>
+        /// <param name="isDynamic">is the vertices going to change often WARNING More expensive to draw if this is true</param>
         public GLObject(GL Gl, float[] verts, uint[] indices, string vertPath, string fragPath, bool isDynamic)
         {
             this.gl = Gl;
@@ -38,6 +39,10 @@ namespace Abstractions
             Ebo.Dispose();
             Vao.Dispose();
             shader.Dispose();
+        }
+        public unsafe void SetUniformfv(string uniformName, Matrix4x4 value)
+        {
+            this.shader.SetUniform(uniformName, value);
         }
         public virtual unsafe void Render()
         {

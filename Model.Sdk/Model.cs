@@ -344,7 +344,7 @@ namespace Abstractions.Model
 			}
 
 		}
-		public class FbxGLModel
+		public class ObjGLModel
         {
 			public Obj model;
             public float[] vertices { 
@@ -359,7 +359,19 @@ namespace Abstractions.Model
 					return tmp.ToArray();
 				} 
 			}
-            public FbxGLModel(string ModelName)
+			public uint[] indices
+            {
+                get
+                {
+					List<uint> tmp = new List<uint>();
+					for(uint i = 0; i <= model.VertexList.Count; i++)
+					{
+						tmp.Add(i);
+					}
+					return tmp.ToArray();
+				}
+            }
+            public ObjGLModel(string ModelName)
             {
 				model = new Obj();
 				model.LoadObj(ModelName);

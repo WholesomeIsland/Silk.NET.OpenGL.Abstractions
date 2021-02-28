@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UserSecretsId>f56aa9c7-e3c1-46fe-9edb-49d1cbeaa9d4</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -10,9 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChamberLib.FbxSharp" Version="0.10.0" />
-    <PackageReference Include="FbxSharp" Version="0.9.0" />
-    <PackageReference Include="JeremyAnsel.Media.WavefrontObj" Version="2.0.19" />
+    <PackageReference Include="Silk.NET.Assimp" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
