@@ -33,8 +33,8 @@ namespace Abstractions.Model
                             tmp.Add((float)item.X);
                             tmp.Add((float)item.Y);
                             tmp.Add((float)item.Z);
-                            tmp.Add((float)model.TextureList[i].X);
-                            tmp.Add((float)model.TextureList[i].Y);
+                            tmp.Add((float)model.TextureList[item.Index].X);
+                            tmp.Add((float)model.TextureList[item.Index].Y);
                         }
                         return tmp.ToArray();
                     }
@@ -45,15 +45,23 @@ namespace Abstractions.Model
                 get
                 {
                     List<uint> tmp = new List<uint>();
-                    foreach (var item in model.FaceList)
+                    foreach (var item in model.FaceList) //I need someway of speeding it up.
                     {
+                        try
+                        {
+                            var test = item.VertexIndexList[3];
+                            tmp.Add((uint)item.VertexIndexList[1] - 1); tmp.Add((uint)item.VertexIndexList[2] - 1); tmp.Add((uint)item.VertexIndexList[3] - 1);
+                            tmp.Add((uint)item.VertexIndexList[0] - 1); tmp.Add((uint)item.VertexIndexList[1] - 1); tmp.Add((uint)item.VertexIndexList[3] - 1);
+                        }
+                        catch (System.IndexOutOfRangeException up)// then i could 'throw up'
+                        {
+                            tmp.Add((uint)item.VertexIndexList[0] - 1); tmp.Add((uint)item.VertexIndexList[1] - 1); tmp.Add((uint)item.VertexIndexList[2] - 1);
+                        }
                         foreach (var item1 in item.VertexIndexList)
                         {
-                            tmp.Add((uint)item1);
-                            Console.WriteLine(item1);
+                            Console.WriteLine(item1 - 1);
                         }
                     }
-                    tmp.Reverse();
                     return tmp.ToArray();
 				}
             }

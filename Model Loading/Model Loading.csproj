@@ -26,6 +26,12 @@
     <None Update="Diffuse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="gun.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Model.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ModelAscii.fbx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

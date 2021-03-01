@@ -115,7 +115,7 @@ namespace Model_Loading
                             cam.ModifyDirection(xOffset, yOffset);
                         }
                     };                }
-                    model = new ObjGLModel("box.obj");
+                    model = new ObjGLModel("gun.obj");
                 List<Texture> tex = new List<Texture>();
                 tex.Add(new Texture(GL.GetApi(window), "Diffuse.png"));
                 globject = new GLObjTextured(GL.GetApi(window), model.vertsWithTexCoords, model.indices, "Shader.vert", "Shader.frag", false, tex);
