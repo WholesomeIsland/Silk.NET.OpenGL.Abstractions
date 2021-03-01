@@ -9,8 +9,8 @@ namespace Abstractions
     public class GLObject
     {
          public Shader shader;
-         VBO Vbo;
-         EBO Ebo;
+         public VBO Vbo;
+         public EBO Ebo;
          public VAO Vao;
         public GL gl;
         public uint[] indices;
@@ -22,8 +22,8 @@ namespace Abstractions
         /// <param name="indices">uint[] of vertices</param>
         /// <param name="vertPath">the path to the vertex shader</param>
         /// <param name="fragPath">the path to the fragment shader</param>
-        /// <param name="isDynamic">is the vertices going to change often WARNING More expensive to draw if this is true</param>
-        public GLObject(GL Gl, float[] verts, uint[] indices, string vertPath, string fragPath, bool isDynamic)
+        /// <param name="isDynamic">is the vertices going to change often (WARNING More expensive to draw the object if this is true)</param>
+        public GLObject(GL Gl, float[] verts, uint[] indices, string vertPath, string fragPath, bool isDynamic, uint VertexSize)
         {
             this.gl = Gl;
             this.indices = indices;
@@ -31,9 +31,10 @@ namespace Abstractions
             Ebo = new EBO(Gl, indices);
             Vbo = new VBO(Gl, verts, isDynamic ? GLEnum.DynamicDraw : GLEnum.StaticDraw);
             Vao = new VAO(Gl, Vbo, Ebo);
-            Vao.VertexAttributePointer(0, 3, VertexAttribPointerType.Float, 0, 0);
+            Vao.VertexAttributePointer(0, 3, VertexAttribPointerType.Float, VertexSize, 0); 
+            gl.EnableVertexAttribArray(0);
         }
-        public void Dispose()
+        public virtual void Dispose()
         {
             Vbo.Dispose();
             Ebo.Dispose();

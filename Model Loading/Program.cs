@@ -88,8 +88,9 @@ namespace Model_Loading
             var window = Window.Create(Options);
             cam = new Camera(new Vector3(0, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 1, 0), 800 / 600);
             window.Render += (obj) => {
+                GL.GetApi(window).Enable(EnableCap.DepthTest);
                 GL.GetApi(window).ClearColor(Color.Black);
-                GL.GetApi(window).Clear((uint)ClearBufferMask.ColorBufferBit);
+                GL.GetApi(window).Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit));
                 globject.SetUniformfv("proj", cam.GetProjectionMatrix());
                 globject.SetUniformfv("model", cam.GetViewMatrix());
                 globject.SetUniformfv("view", Matrix4x4.Identity);
@@ -113,12 +114,19 @@ namespace Model_Loading
 
                             cam.ModifyDirection(xOffset, yOffset);
                         }
-                    };
-                }
-                    model = new ObjGLModel("Model.obj");
+                    };                }
+                    model = new ObjGLModel("box.obj");
                 List<Texture> tex = new List<Texture>();
                 tex.Add(new Texture(GL.GetApi(window), "Diffuse.png"));
-                globject = new GLObjTextured(GL.GetApi(window), model.vertices, null, "Shader.vert", "Shader.frag", false, tex);
+                globject = new GLObjTextured(GL.GetApi(window), model.vertsWithTexCoords, model.indices, "Shader.vert", "Shader.frag", false, tex);
+                foreach (var item in model.vertices)
+                {
+                    Console.WriteLine(item);
+                }
+                foreach (var item in model.indices)
+                {
+                    Console.WriteLine(item);
+                }
             };
             window.Closing += () => {
                 globject.Dispose();
@@ -147,8 +155,6 @@ namespace Model_Loading
                     //Move right
                     cam.Position += Vector3.Normalize(Vector3.Cross(cam.Front, cam.Up)) * moveSpeed;
                 }
-
-                Console.WriteLine(model.vertices.ToArray().Length / 3);
             };
             window.Run();
         }

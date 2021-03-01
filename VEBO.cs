@@ -15,9 +15,9 @@ public class BufferObject<TDataType> : IDisposable
 
             _handle = _gl.GenBuffer();
             Bind();
-            fixed (void* d = data)
+            fixed (void* d = &data.ToArray()[0])
             {
-                _gl.BufferData(bufferType, (UIntPtr) (data.Length * sizeof(TDataType)), d, StaticOrDynamic);
+                _gl.BufferData(bufferType, (nuint) (data.Length * sizeof(TDataType)), d, StaticOrDynamic);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using Silk.NET.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Abstractions
@@ -9,10 +10,12 @@ namespace Abstractions
     {
         List<Texture> textures = new List<Texture>();
         float[] verts;
-        public GLObjTextured(GL gl, float[] verts, uint[] indices, string vertPath, string fragPath, bool isDynamic, List<Texture> textures) : base(gl, verts, indices, vertPath, fragPath, isDynamic)
+        public GLObjTextured(GL gl, float[] verts, uint[] indices, string vertPath, string fragPath, bool isDynamic, List<Texture> textures) : base(gl, verts, indices, vertPath, fragPath, isDynamic, 5)
         {
             this.textures = textures;
             this.verts = verts;
+            Vao.VertexAttributePointer(1, 2, VertexAttribPointerType.Float, 5, 3); 
+            gl.EnableVertexAttribArray(1);
         }
         public unsafe override void Render()
         {
@@ -24,11 +27,22 @@ namespace Abstractions
             shader.Use();
             if (indices != null)
             {
-                gl.DrawElements((GLEnum)PrimitiveType.Triangles, (uint)indices.Length, GLEnum.UnsignedInt, null);
+               gl.DrawElements(PrimitiveType.Triangles, (uint)indices.Length, GLEnum.UnsignedInt, null);
             }
             else
             {
                 gl.DrawArrays(PrimitiveType.Triangles, 0, (uint)verts.Length);
+            }
+        }
+        public unsafe override void Dispose()
+        {
+            Vbo.Dispose();
+            Ebo.Dispose();
+            Vao.Dispose();
+            shader.Dispose();
+            foreach (var item in textures)
+            {
+                item.Dispose();
             }
         }
     }

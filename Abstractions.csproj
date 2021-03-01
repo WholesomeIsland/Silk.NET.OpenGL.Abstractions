@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>Abstractions</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Version>0.1.2</Version>
@@ -14,7 +14,7 @@
         <PackageProjectUrl>https://github.com/WholesomeIsland/CommonOpenGLAbstractions</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <UserSecretsId>bb8d7281-1e49-4325-b8bf-607946c951db</UserSecretsId>
- 
+  <LangVersion>9.0</LangVersion>
 </PropertyGroup>
 <ItemGroup>
   <Compile Remove="Abstractions.Math\**" />
