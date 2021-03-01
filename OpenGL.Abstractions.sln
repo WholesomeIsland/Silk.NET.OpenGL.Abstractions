@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hello Quad", "Hello Quad\He
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helo Quad Abstractions", "Helo Quad Abstractions\Helo Quad Abstractions.csproj", "{45814BB2-19EB-4731-8F6C-B934D8DAA196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model Loading", "Model Loading\Model Loading.csproj", "{B6B9177A-0270-41EE-AB2B-720B9C810E27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model Loading", "Model Loading\Model Loading.csproj", "{B6B9177A-0270-41EE-AB2B-720B9C810E27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.Sdk", "Model.Sdk\Model.Sdk.csproj", "{16DACD5B-B278-4DB5-8251-3F5FD098E54C}"
 EndProject

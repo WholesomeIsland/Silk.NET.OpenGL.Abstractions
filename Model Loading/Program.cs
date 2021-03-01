@@ -119,14 +119,6 @@ namespace Model_Loading
                 List<Texture> tex = new List<Texture>();
                 tex.Add(new Texture(GL.GetApi(window), "Diffuse.png"));
                 globject = new GLObjTextured(GL.GetApi(window), model.vertsWithTexCoords, model.indices, "Shader.vert", "Shader.frag", false, tex);
-                foreach (var item in model.vertices)
-                {
-                    Console.WriteLine(item);
-                }
-                foreach (var item in model.indices)
-                {
-                    Console.WriteLine(item);
-                }
             };
             window.Closing += () => {
                 globject.Dispose();

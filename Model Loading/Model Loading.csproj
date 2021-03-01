@@ -14,6 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="ObjParser">
+      <HintPath>..\Model.Sdk\ObjParser.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="box.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
