@@ -1,7 +1,7 @@
 ﻿using Abstractions;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
-using Silk.NET.Windowing.Common;
+using Silk.NET.Windowing;
 using System.Drawing;
 
 namespace Helo_Quad_Abstractions
@@ -27,7 +27,7 @@ namespace Helo_Quad_Abstractions
         static unsafe void Main(string[] args)
         {
             var Options = WindowOptions.Default;
-            Options.Size = new Size(800, 600);
+            Options.Size = new Silk.NET.Maths.Vector2D<int>(800, 600);
             Options.Title = "LearnOpenGL with Silk.NET";
             var window = Window.Create(Options);
             window.Render += (obj) => {
@@ -36,7 +36,7 @@ namespace Helo_Quad_Abstractions
                 globject.Render();
             };
             window.Load += () => {
-                globject = new GLObject(GL.GetApi(window), Vertices, Indices, "shader.vert", "shader.frag", false);
+                globject = new GLObject(GL.GetApi(window), Vertices, Indices, "shader.vert", "shader.frag", false, 1);
             };
             window.Closing += () => {
                 globject.Dispose();

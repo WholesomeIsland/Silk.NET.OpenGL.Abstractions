@@ -1,7 +1,7 @@
 ﻿using Abstractions;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
-using Silk.NET.Windowing.Common;
+using Silk.NET.Windowing;
 using System.Drawing;
 
 namespace Hello_Quad
@@ -26,11 +26,11 @@ namespace Hello_Quad
         static EBO ebo;
         static VBO vbo;
         static VAO vao;
-        static Shader shader;
+        static Abstractions.Shader shader;
         static unsafe void Main(string[] args)
         {
             var Options = WindowOptions.Default;
-            Options.Size = new Size(800, 600);
+            Options.Size = new Silk.NET.Maths.Vector2D<int>(800, 600);
             Options.Title = "LearnOpenGL with Silk.NET";
             var window = Window.Create(Options);
             window.Render += (obj) => {
@@ -45,7 +45,7 @@ namespace Hello_Quad
                 vbo = new VBO(GL.GetApi(window), Vertices, GLEnum.StaticDraw);
                 ebo = new EBO(GL.GetApi(window), Indices);
                 vao = new VAO(GL.GetApi(window), vbo, ebo);
-                shader = new Shader(GL.GetApi(window), "shader.vert", "shader.frag");
+                shader = new Abstractions.Shader(GL.GetApi(window), "shader.vert", "shader.frag");
                 vao.VertexAttributePointer(0, 3, VertexAttribPointerType.Float, 0, 0);
             };
             window.Closing += () => {
