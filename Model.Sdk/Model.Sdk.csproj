@@ -4,13 +4,13 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UserSecretsId>f56aa9c7-e3c1-46fe-9edb-49d1cbeaa9d4</UserSecretsId>
-    <PackageId>Abstractions</PackageId>
+    <PackageId>OpenGL.abstractions</PackageId>
     <Copyright />
     <Authors>Wholesomeisland</Authors>
-    <Company>unaffiliated</Company>
-    <Product>Abstractions</Product>
+    <Company></Company>
+    <Product>OpenGL.abstractions</Product>
     <Description>High-Level OpenGL abstractions built with Silk.NET</Description>
-    <PackageLicenseExpression>MIT License</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://www.github.com/Wholesomeisland/CommonOpenGLAbstractions</PackageProjectUrl>
     <RepositoryUrl>https://www.github.com/Wholesomeisland/CommonOpenGLAbstractions</RepositoryUrl>
     <PackageTags>OpenGL Silk.NET</PackageTags>
