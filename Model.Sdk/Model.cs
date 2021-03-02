@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Assimp;
 namespace Abstractions.Model
 {
@@ -106,6 +107,62 @@ namespace Abstractions.Model
                 var ctx = new AssimpContext();
                 model = ctx.ImportFile(ModelName, PostProcessSteps.Triangulate | PostProcessSteps.GenerateSmoothNormals | PostProcessSteps.FlipUVs | PostProcessSteps.CalculateTangentSpace);
                 processNode(model.RootNode, model);
+            }
+            public void SetMatrix4(string name, Abstractions.math.Matrix4x4 matrix)
+            {
+                foreach (var item in objs)
+                {
+                    try
+                    {
+                        item.shader.SetUniform(name, matrix);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            }
+            public void SetFloat(string name, float f)
+            {
+                foreach (var item in objs)
+                {
+                    try
+                    {
+                        item.shader.SetUniform(name, f);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            }
+            public void SetInt(string name, int i)
+            {
+                foreach (var item in objs)
+                {
+                    try
+                    {
+                        item.shader.SetUniform(name, i);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            }
+            public void SetVec2(string name, Vector2 vec)
+            {
+                foreach (var item in objs)
+                {
+                    try
+                    {
+                        item.shader.SetUniform(name, vec);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
             }
             public void Draw(Abstractions.math.Matrix4x4 proj, math.Matrix4x4 view, math.Matrix4x4 model, string[] uniformNames)
             {
