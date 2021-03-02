@@ -75,8 +75,7 @@ namespace Model_Loading
     }
     class Program
     {
-        static GLObjTextured globject;
-        static ObjGLModel model;
+        static GLModel model;
         private static IKeyboard primaryKeyboard;
         static Camera cam; 
         private static Vector2 LastMousePosition;
@@ -86,15 +85,11 @@ namespace Model_Loading
             Options.Size = new Silk.NET.Maths.Vector2D<int>(800, 600);
             Options.Title = "LearnOpenGL with Silk.NET";
             var window = Window.Create(Options);
-            cam = new Camera(new Vector3(0, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 1, 0), 800 / 600);
             window.Render += (obj) => {
                 GL.GetApi(window).Enable(EnableCap.DepthTest);
                 GL.GetApi(window).ClearColor(Color.Black);
                 GL.GetApi(window).Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit));
-                globject.SetUniformfv("proj", cam.GetProjectionMatrix());
-                globject.SetUniformfv("model", cam.GetViewMatrix());
-                globject.SetUniformfv("view", Matrix4x4.Identity);
-                globject.Render();
+                model.Draw(cam.GetProjectionMatrix(), cam.GetViewMatrix(), Matrix4x4.Identity, new string[] {"proj", "view", "model"});
             };
             window.Load += () => {
                 IInputContext input = window.CreateInput();
@@ -114,14 +109,13 @@ namespace Model_Loading
 
                             cam.ModifyDirection(xOffset, yOffset);
                         }
-                    };                }
-                    model = new ObjGLModel("gun.obj");
-                List<Texture> tex = new List<Texture>();
-                tex.Add(new Texture(GL.GetApi(window), "Diffuse.png"));
-                globject = new GLObjTextured(GL.GetApi(window), model.vertsWithTexCoords, model.indices, "Shader.vert", "Shader.frag", false, tex);
+                    };
+                }
+                model = new GLModel(GL.GetApi(window), "gun.obj", "Shader.vert", "Shader.frag", false);
+                cam = new Camera(new Vector3(0, 0, -10), new Vector3(0, 0, 1), new Vector3(0, 1, 0), 800 / 600);
             };
             window.Closing += () => {
-                globject.Dispose();
+                model.Dispose();
             };
             window.Update += (deltaTime) =>
             {

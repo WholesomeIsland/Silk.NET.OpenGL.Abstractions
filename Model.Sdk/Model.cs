@@ -1,74 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
-using ObjParser;
+using Assimp;
 namespace Abstractions.Model
 {
     namespace GL
     {
-        public class ObjGLModel
+        /* This File is code based on https://learnopengl.com/Model-Loading/Model and https://learnopengl.com/Model-Loading/Mesh. 
+         * these tutorials are made by Joey De Vries and I am grateful for his tutorials
+         * this is a translation of a hybrid between the Mesh And Model class to c# and assimp.net
+         */
+        public struct Vertex
         {
-			public Obj model;
-            public float[] vertices { 
-				get {
-					List<float> tmp = new List<float>();
-                    foreach(var item in model.VertexList)
-                    {
-						tmp.Add((float)item.X);
-						tmp.Add((float)item.Y);
-						tmp.Add((float)item.Z);
-                    }
-					return tmp.ToArray();
-				} 
-			}
-            public float[] vertsWithTexCoords
+            public Vector3D position;
+            public Vector3D normal;
+            public Vector2D TexCoord;
+            public Vertex(Vector3D pos, Vector3D norm, Vector2D texcoords)
             {
-                get
+                position = pos; normal = norm; TexCoord = texcoords;
+            }
+        }
+        public class GLModel
+        {
+            Silk.NET.OpenGL.GL gl;
+			public Scene model;
+            public List<Mesh> meshes;
+            public List<GLObjTextured> objs;
+            string vertPath, fragPath;
+            bool isDynamic;
+            void processNode(Node node, Scene scene)
+            {
+                for (int i = 0; i < node.MeshCount; i++)
                 {
-                    unsafe
-                    {
-                        List<float> tmp = new List<float>();
-                        for (int i = 0; i<model.VertexList.Count; i++)
-                        {
-                            var item = model.VertexList[i];
-                            tmp.Add((float)item.X);
-                            tmp.Add((float)item.Y);
-                            tmp.Add((float)item.Z);
-                            tmp.Add((float)model.TextureList[item.Index].X);
-                            tmp.Add((float)model.TextureList[item.Index].Y);
-                        }
-                        return tmp.ToArray();
-                    }
+                    Mesh mesh = scene.Meshes[i];
+                    meshes.Add(mesh);
+                    objs.Add(processMesh(mesh, scene));
+                }
+                for (int i = 0; i < node.ChildCount; i++)
+                {
+                    processNode(node.Children[i], scene);
                 }
             }
-			public uint[] indices
+            GLObjTextured processMesh(Mesh mesh, Scene scene)
             {
-                get
+                List<Vertex> vlist = new List<Vertex>();
+                List<uint> ind = new List<uint>();
+                List<Texture> tex = new List<Texture>();
+                for (int i = 0; i < mesh.Vertices.Count; i++)
                 {
-                    List<uint> tmp = new List<uint>();
-                    foreach (var item in model.FaceList) //I need someway of speeding it up.
+                    Vertex v = new Vertex(mesh.Vertices[i], mesh.Normals[i], new Vector2D(mesh.TextureCoordinateChannels[0][i].X, mesh.TextureCoordinateChannels[0][i].Y));
+                    vlist.Add(v);
+                }
+                for (int i = 0; i < mesh.Faces.Count; i++)
+                {
+                    Face face = mesh.Faces[i];
+                    for (int j = 0; j < face.IndexCount; j++)
                     {
-                        try
-                        {
-                            var test = item.VertexIndexList[3];
-                            tmp.Add((uint)item.VertexIndexList[1] - 1); tmp.Add((uint)item.VertexIndexList[2] - 1); tmp.Add((uint)item.VertexIndexList[3] - 1);
-                            tmp.Add((uint)item.VertexIndexList[0] - 1); tmp.Add((uint)item.VertexIndexList[1] - 1); tmp.Add((uint)item.VertexIndexList[3] - 1);
-                        }
-                        catch (System.IndexOutOfRangeException up)// then i could 'throw up'
-                        {
-                            tmp.Add((uint)item.VertexIndexList[0] - 1); tmp.Add((uint)item.VertexIndexList[1] - 1); tmp.Add((uint)item.VertexIndexList[2] - 1);
-                        }
-                        foreach (var item1 in item.VertexIndexList)
-                        {
-                            Console.WriteLine(item1 - 1);
-                        }
+                        ind.Add((uint)face.Indices[j]);
                     }
-                    return tmp.ToArray();
-				}
+                }
+                var matIndex = scene.Materials[mesh.MaterialIndex];
+                List<Texture> diffTex = LoadTextures(matIndex, TextureType.Diffuse);
+                List<Texture> specTex = LoadTextures(matIndex, TextureType.Specular);
+                List<Texture> normTex = LoadTextures(matIndex, TextureType.Normals);
+                tex.AddRange(diffTex);
+                tex.AddRange(specTex);
+                tex.AddRange(normTex);
+                return new GLObjTextured(gl, vlistToflist(vlist).ToArray(), ind.ToArray(), vertPath, fragPath, isDynamic, tex);
             }
-            public ObjGLModel(string ModelName)
+            List<Texture> LoadTextures(Material mat, TextureType type)
             {
-                model = new Obj();
-                model.LoadObj(ModelName);
+                List<Texture> retval = new List<Texture>();
+                for (int i = 0; i < mat.GetMaterialTextureCount(type); i++)
+                {
+                    mat.GetMaterialTexture(type, i, out var tex);
+                    Console.WriteLine(tex.FilePath);
+                    retval.Add(texFromFile(tex.FilePath));
+                }
+                return retval;
+            }
+            Texture texFromFile(string path)
+            {
+                return new Texture(gl, path, SixLabors.ImageSharp.Processing.FlipMode.None);
+            }
+            List<float> vlistToflist(List<Vertex> vlist)
+            {
+                List<float> retval = new List<float>();
+                foreach (var item in vlist)
+                {
+                    retval.Add(item.position.X);
+                    retval.Add(item.position.Y);
+                    retval.Add(item.position.Z);
+                    retval.Add(item.TexCoord.X);
+                    retval.Add(item.TexCoord.Y);
+                }
+                return retval;
+            }
+            public GLModel(Silk.NET.OpenGL.GL _gl, string ModelName, string vertPath, string FragPath, bool isDynamic)
+            {
+                this.vertPath = vertPath;
+                this.fragPath = FragPath;
+                this.isDynamic = isDynamic;
+                this.gl = _gl;
+                meshes = new List<Mesh>();
+                objs = new List<GLObjTextured>();
+                var ctx = new AssimpContext();
+                model = ctx.ImportFile(ModelName, PostProcessSteps.Triangulate | PostProcessSteps.GenerateSmoothNormals | PostProcessSteps.FlipUVs | PostProcessSteps.CalculateTangentSpace);
+                processNode(model.RootNode, model);
+            }
+            public void Draw(Abstractions.math.Matrix4x4 proj, math.Matrix4x4 view, math.Matrix4x4 model, string[] uniformNames)
+            {
+                for (int i = 0; i < objs.Count; i++)
+                {
+                    objs[i].SetUniformfv(uniformNames[0], proj);
+                    objs[i].SetUniformfv(uniformNames[1], view);
+                    objs[i].SetUniformfv(uniformNames[2], model);
+                    objs[i].Render();
+                }
+            }
+            public void Dispose()
+            {
+                foreach (var item in objs)
+                {
+                    item.Dispose();
+                }
             }
         }
     }

@@ -12,13 +12,13 @@ namespace Abstractions
         private uint _handle;
         private GL _gl;
 
-        public unsafe Texture(GL gl, string path)
+        public unsafe Texture(GL gl, string path, FlipMode fm)
         {
             //Loading an image using imagesharp.
             Image<Rgba32> img = (Image<Rgba32>)Image.Load(path);
             //We need to flip our image as image sharps coordinates has origin (0, 0) in the top-left corner,
             //where as openGL has origin in the bottom-left corner.
-            img.Mutate(x => x.Flip(FlipMode.Vertical));
+            img.Mutate(x => x.Flip(fm));
 
             fixed (void* data = &MemoryMarshal.GetReference(img.GetPixelRowSpan(0)))
             {

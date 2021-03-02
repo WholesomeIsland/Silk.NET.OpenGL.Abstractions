@@ -1,25 +1,36 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UserSecretsId>f56aa9c7-e3c1-46fe-9edb-49d1cbeaa9d4</UserSecretsId>
+    <PackageId>Abstractions</PackageId>
+    <Copyright />
+    <Authors>Wholesomeisland</Authors>
+    <Company>unaffiliated</Company>
+    <Product>Abstractions</Product>
+    <Description>High-Level OpenGL abstractions built with Silk.NET</Description>
+    <PackageLicenseExpression>MIT License</PackageLicenseExpression>
+    <PackageProjectUrl>https://www.github.com/Wholesomeisland/CommonOpenGLAbstractions</PackageProjectUrl>
+    <RepositoryUrl>https://www.github.com/Wholesomeisland/CommonOpenGLAbstractions</RepositoryUrl>
+    <PackageTags>OpenGL Silk.NET</PackageTags>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="ObjParser">
-      <HintPath>ObjParser.dll</HintPath>
-    </Reference>
+    <PackageReference Include="AssimpNet" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ObjParser.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

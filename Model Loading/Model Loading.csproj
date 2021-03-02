@@ -20,10 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="box.obj">
+    <None Update="gun.dae">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Diffuse.png">
+    <None Update="_albedo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_albedo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="gun.mtl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="gun.obj">
