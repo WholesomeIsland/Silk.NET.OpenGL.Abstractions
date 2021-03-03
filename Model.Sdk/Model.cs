@@ -28,20 +28,20 @@ namespace Abstractions.Model
             public List<GLObjTextured> objs;
             string vertPath, fragPath;
             bool isDynamic;
-            void processNode(Node node, Scene scene)
+            void processNode(Node node, Scene scene, TextureType[] texturesToLoad)
             {
                 for (int i = 0; i < node.MeshCount; i++)
                 {
                     Mesh mesh = scene.Meshes[i];
                     meshes.Add(mesh);
-                    objs.Add(processMesh(mesh, scene));
+                    objs.Add(processMesh(mesh, scene, texturesToLoad));
                 }
                 for (int i = 0; i < node.ChildCount; i++)
                 {
-                    processNode(node.Children[i], scene);
+                    processNode(node.Children[i], scene, texturesToLoad);
                 }
             }
-            GLObjTextured processMesh(Mesh mesh, Scene scene)
+            GLObjTextured processMesh(Mesh mesh, Scene scene, TextureType[] texturesToLoad)
             {
                 List<Vertex> vlist = new List<Vertex>();
                 List<uint> ind = new List<uint>();
@@ -60,12 +60,11 @@ namespace Abstractions.Model
                     }
                 }
                 var matIndex = scene.Materials[mesh.MaterialIndex];
-                List<Texture> diffTex = LoadTextures(matIndex, TextureType.Diffuse);
-                List<Texture> specTex = LoadTextures(matIndex, TextureType.Specular);
-                List<Texture> normTex = LoadTextures(matIndex, TextureType.Normals);
-                tex.AddRange(diffTex);
-                tex.AddRange(specTex);
-                tex.AddRange(normTex);
+                foreach (var item in texturesToLoad)
+                {
+                    List<Texture> Tex = LoadTextures(matIndex, item);
+                    tex.AddRange(Tex);
+                }
                 return new GLObjTextured(gl, vlistToflist(vlist).ToArray(), ind.ToArray(), vertPath, fragPath, isDynamic, tex);
             }
             List<Texture> LoadTextures(Material mat, TextureType type)
@@ -96,7 +95,7 @@ namespace Abstractions.Model
                 }
                 return retval;
             }
-            public GLModel(Silk.NET.OpenGL.GL _gl, string ModelName, string vertPath, string FragPath, bool isDynamic)
+            public GLModel(Silk.NET.OpenGL.GL _gl, string ModelName, string vertPath, string FragPath, bool isDynamic, TextureType[] texturesToLoad)
             {
                 this.vertPath = vertPath;
                 this.fragPath = FragPath;
@@ -106,7 +105,7 @@ namespace Abstractions.Model
                 objs = new List<GLObjTextured>();
                 var ctx = new AssimpContext();
                 model = ctx.ImportFile(ModelName, PostProcessSteps.Triangulate | PostProcessSteps.GenerateSmoothNormals | PostProcessSteps.FlipUVs | PostProcessSteps.CalculateTangentSpace);
-                processNode(model.RootNode, model);
+                processNode(model.RootNode, model,texturesToLoad);
             }
             public void SetMatrix4(string name, Abstractions.math.Matrix4x4 matrix)
             {

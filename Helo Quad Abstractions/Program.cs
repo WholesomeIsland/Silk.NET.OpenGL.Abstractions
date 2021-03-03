@@ -1,7 +1,6 @@
 ﻿using Abstractions;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
-using Silk.NET.Windowing;
 using System.Drawing;
 
 namespace Helo_Quad_Abstractions

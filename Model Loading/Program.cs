@@ -1,10 +1,7 @@
-﻿using Abstractions;
-using Silk.NET.OpenGL;
+﻿using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
 using Abstractions.Model.GL;
 using System.Drawing;
-using System.Collections.Generic;
-using Texture = Abstractions.Texture;
 using Matrix4x4 = Abstractions.math.Matrix4x4;
 using System.Numerics;
 using System;
@@ -111,7 +108,7 @@ namespace Model_Loading
                         }
                     };
                 }
-                model = new GLModel(GL.GetApi(window), "gun.obj", "Shader.vert", "Shader.frag", false);
+                model = new GLModel(GL.GetApi(window), "gun.obj", "Shader.vert", "Shader.frag", false, new[] {Assimp.TextureType.Diffuse});
                 cam = new Camera(new Vector3(0, 0, -10), new Vector3(0, 0, 1), new Vector3(0, 1, 0), 800 / 600);
             };
             window.Closing += () => {
