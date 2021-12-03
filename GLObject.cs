@@ -1,7 +1,7 @@
 ﻿using Silk.NET.OpenGL;
 using System;
 using System.Collections.Generic;
-using Abstractions.math;
+using System.Numerics;
 using System.Text;
 
 namespace Abstractions

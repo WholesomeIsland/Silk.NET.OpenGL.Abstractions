@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions", "Abstractions.csproj", "{30E4121B-D6D0-42BE-801F-A5BCF248E5E6}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model Loading", "Model Loading\Model Loading.csproj", "{B6B9177A-0270-41EE-AB2B-720B9C810E27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.Sdk", "Model.Sdk\Model.Sdk.csproj", "{16DACD5B-B278-4DB5-8251-3F5FD098E54C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Math", "Abstractions.Math\Abstractions.Math.csproj", "{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,18 +85,6 @@ Global
 		{16DACD5B-B278-4DB5-8251-3F5FD098E54C}.Release|x64.Build.0 = Release|Any CPU
 		{16DACD5B-B278-4DB5-8251-3F5FD098E54C}.Release|x86.ActiveCfg = Release|Any CPU
 		{16DACD5B-B278-4DB5-8251-3F5FD098E54C}.Release|x86.Build.0 = Release|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Debug|x64.Build.0 = Debug|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Debug|x86.Build.0 = Debug|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Release|x64.ActiveCfg = Release|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Release|x64.Build.0 = Release|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Release|x86.ActiveCfg = Release|Any CPU
-		{AC7C3F1D-01EE-4A4E-9ECA-1B4208484B3D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

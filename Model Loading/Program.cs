@@ -2,7 +2,6 @@
 using Silk.NET.Windowing;
 using Abstractions.Model.GL;
 using System.Drawing;
-using Matrix4x4 = Abstractions.math.Matrix4x4;
 using System.Numerics;
 using System;
 using Silk.NET.Input;

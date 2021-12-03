@@ -1,9 +1,7 @@
-﻿using Abstractions.math;
-using Silk.NET.OpenGL;
+﻿using Silk.NET.OpenGL;
 using System;
 using System.IO;
 using System.Numerics;
-using Matrix4x4 = Abstractions.math.Matrix4x4;
 
 namespace Abstractions
 {

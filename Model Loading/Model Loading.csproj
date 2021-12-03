@@ -2,21 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Model_Loading</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Abstractions.csproj" />
-    <ProjectReference Include="..\Abstractions.Math\Abstractions.Math.csproj" />
     <ProjectReference Include="..\Model.Sdk\Model.Sdk.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ObjParser">
-      <HintPath>..\Model.Sdk\ObjParser.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

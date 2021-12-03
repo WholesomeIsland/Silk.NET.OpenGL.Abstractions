@@ -107,7 +107,7 @@ namespace Abstractions.Model
                 model = ctx.ImportFile(ModelName, PostProcessSteps.Triangulate | PostProcessSteps.GenerateSmoothNormals | PostProcessSteps.FlipUVs | PostProcessSteps.CalculateTangentSpace);
                 processNode(model.RootNode, model,texturesToLoad);
             }
-            public void SetMatrix4(string name, Abstractions.math.Matrix4x4 matrix)
+            public void SetMatrix4(string name, System.Numerics.Matrix4x4 matrix)
             {
                 foreach (var item in objs)
                 {
@@ -163,7 +163,7 @@ namespace Abstractions.Model
                     }
                 }
             }
-            public void Draw(Abstractions.math.Matrix4x4 proj, math.Matrix4x4 view, math.Matrix4x4 model, string[] uniformNames)
+            public void Draw(System.Numerics.Matrix4x4 proj, System.Numerics.Matrix4x4 view, System.Numerics.Matrix4x4 model, string[] uniformNames)
             {
                 for (int i = 0; i < objs.Count; i++)
                 {
