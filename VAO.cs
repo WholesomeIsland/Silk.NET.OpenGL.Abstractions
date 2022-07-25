@@ -10,16 +10,13 @@ namespace Abstractions{
         private uint _handle;
         private GL _gl;
 
-        public VertexArrayObject(GL gl, BufferObject<TVertexType> vbo, BufferObject<TIndexType> ebo)
+        public VertexArrayObject(GL gl)
         {
             //Saving the GL instance.
             _gl = gl;
 
             //Setting out handle and binding the VBO and EBO to this VAO.
             _handle = _gl.GenVertexArray();
-            Bind();
-            vbo.Bind();
-            ebo.Bind();
         }
 
         public unsafe void VertexAttributePointer(uint index, int count, VertexAttribPointerType type, uint vertexSize, int offSet)
@@ -43,6 +40,6 @@ namespace Abstractions{
         }
     }
     public class VAO : VertexArrayObject<float, uint>{
-      public VAO(GL gl, VBO vbo, EBO ebo) : base(gl, vbo, ebo){}
+      public VAO(GL gl) : base(gl){}
     }
 }
