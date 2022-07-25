@@ -6,24 +6,28 @@ public class BufferObject<TDataType> : IDisposable
     {
         private uint _handle;
         private GLEnum _bufferType;
+        private GLEnum _bufferUsage;
         private GL _gl;
 
-        public unsafe BufferObject(GL gl, Span<TDataType> data, GLEnum bufferType, GLEnum StaticOrDynamic)
+        public unsafe BufferObject(GL gl, GLEnum bufferType, GLEnum StaticOrDynamic)
         {
             _gl = gl;
             _bufferType = bufferType;
-
+        
             _handle = _gl.GenBuffer();
-            Bind();
-            fixed (void* d = data)
-            {
-                _gl.BufferData(bufferType, (nuint) (data.Length * sizeof(TDataType)), d, StaticOrDynamic);
-            }
         }
 
         public void Bind()
         {
             _gl.BindBuffer(_bufferType, _handle);
+        }
+        
+        public void Upload(Span<TDataType> data)
+        {
+            fixed (void* d = data)
+            {
+                _gl.BufferData(_bufferType, (nuint) (data.Length * sizeof(TDataType)), d, _bufferUsage);
+            }
         }
 
         public void Dispose()
