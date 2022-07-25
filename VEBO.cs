@@ -37,10 +37,10 @@ public class BufferObject<TDataType> : IDisposable
     }
 
 public class VBO : BufferObject<float>{
-  public VBO(GL gl, Span<float> data, GLEnum SOD) : base(gl, data,GLEnum.ArrayBuffer, SOD){}
+  public VBO(GL gl, GLEnum SOD) : base(gl, data,GLEnum.ArrayBuffer, SOD){}
 }
 
 public class EBO : BufferObject<uint>{
-  public EBO(GL gl, Span<uint> data) : base(gl, data,GLEnum.ElementArrayBuffer, GLEnum.StaticDraw){}
+  public EBO(GL gl) : base(gl, data,GLEnum.ElementArrayBuffer, GLEnum.StaticDraw){}
 }
 }
